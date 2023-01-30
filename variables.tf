@@ -32,6 +32,14 @@ variable "dynamo_db_stream_parameters" {
   default = null
 }
 
+variable "sqs_queue_parameters" {
+  type = object({
+    batch_size = optional(number)
+    maximum_batching_window_in_seconds = optional(string)
+  })
+  default = null
+}
+
 variable "source_filters" {
   default = []
 }

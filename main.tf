@@ -1,9 +1,10 @@
 locals {
-  source_type = var.source_type
-
   source_parameters_map = {
     dynamodb = {
       dynamo_db_stream_parameters = var.dynamo_db_stream_parameters
+    }
+    sqs = {
+      sqs_queue_parameters = var.sqs_queue_parameters
     }
   }
 

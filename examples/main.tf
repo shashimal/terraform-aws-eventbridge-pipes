@@ -12,8 +12,18 @@ module "pipe_dynamodb" {
   }
 }
 
-output "d" {
-  value = module.pipe_dynamodb.sourcemap
+module "pipe_sqs" {
+  source = "../"
+
+  name = "test-pipe-sqs"
+  source_type = "sqs"
+  source_arn = aws_sqs_queue.sqs.arn
+  target_arn = "arn:aws:lambda:us-east-1:793209430381:function:aft-process"
+  role_arn = aws_iam_role.pipe_iam_role.arn
+
+  dynamo_db_stream_parameters = {
+    starting_position = "LATEST"
+  }
 }
 
 resource "aws_iam_role" "pipe_iam_role" {
@@ -25,3 +35,5 @@ resource "aws_iam_role_policy" "pipe_dynamodb_role_policy" {
   policy = data.aws_iam_policy_document.pipe_dynamodb_policy_document.json
   role   = aws_iam_role.pipe_iam_role.id
 }
+
+resource "aws_sqs_queue" "sqs" {}

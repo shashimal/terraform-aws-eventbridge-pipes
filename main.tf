@@ -26,7 +26,3 @@ resource "awscc_pipes_pipe" "pipe" {
 
   target = var.target_arn
 }
-
-output "sourcemap" {
-  value = local.source_parameters
-}

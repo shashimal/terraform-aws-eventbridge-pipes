@@ -17,6 +17,13 @@ data "aws_iam_policy_document" "pipe_dynamodb_policy_document" {
     resources = ["*"]
   }
   statement {
+    sid = "SQSPermission"
+    actions = [
+      "sqs:*"
+    ]
+    resources = ["*"]
+  }
+  statement {
     sid = "AccessDynamoDB"
     actions = [
       "dynamodb:DescribeStream",

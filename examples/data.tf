@@ -34,3 +34,21 @@ data "aws_iam_policy_document" "pipe_dynamodb_policy_document" {
     resources = ["*"]
   }
 }
+
+data "aws_iam_policy_document" "pipe_sqs_policy_document" {
+  statement {
+    sid = "InvokeLambda"
+    actions = [
+      "lambda:InvokeFunction"
+    ]
+    resources = ["*"]
+  }
+  statement {
+    sid = "SQSPermission"
+    actions = [
+      "sqs:*"
+    ]
+    resources = ["*"]
+  }
+}
+

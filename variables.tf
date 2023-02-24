@@ -14,6 +14,10 @@ variable "target_arn" {
   default = ""
 }
 
+variable "enrichment_arn" {
+  default = ""
+}
+
 variable "source_type" {
   default = ""
 }
@@ -34,7 +38,7 @@ variable "dynamo_db_stream_parameters" {
 
 variable "sqs_queue_parameters" {
   type = object({
-    batch_size = optional(number)
+    batch_size                         = optional(number)
     maximum_batching_window_in_seconds = optional(string)
   })
   default = null
@@ -43,3 +47,17 @@ variable "sqs_queue_parameters" {
 variable "source_filters" {
   default = []
 }
+
+variable "input_template" {
+  type    = string
+  default = null
+}
+
+#variable "http_parameters" {
+#  type = object({
+#    header_parameters       = map(string)
+#    path_parameter_values   = optional(list(string))
+#    query_string_parameters = optional(map(string))
+#  })
+#  default = {}
+#}
